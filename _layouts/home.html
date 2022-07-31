@@ -16,9 +16,15 @@ layout: default
     <li>
       <span class="post-meta">{{ post.date | date: date_format }}</span>
       <h3>
-        <a class="post-link" href="{{ post.url | relative_url }}">
-          {{ post.title | escape }}
-        </a>
+        <div style="display: flex; justify-content: space-between">
+          <span
+            ><a class="post-link" href="{{ post.url | relative_url }}">
+              {{ post.title | escape }}</a
+            ></span
+          >
+          {%- if post.tags -%}<span class="post-meta"> {{ post | tags }}</span
+          >{%- endif -%}
+        </div>
       </h3>
       {%- if site.show_excerpts -%} {{ post.excerpt }} {%- endif -%}
     </li>

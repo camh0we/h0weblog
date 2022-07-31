@@ -223,12 +223,13 @@
 }
 
 .post-meta {
+  display: flex;
   font-size: $small-font-size;
   color: $brand-color;
 }
 
 .post-link {
-  display: block;
+  display: flex;
   @include relative-font-size(1.5);
 }
 

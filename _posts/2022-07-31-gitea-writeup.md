@@ -2,6 +2,7 @@
 layout: post
 title: Gitea
 excerpt_separator: <!--more-->
+tags: gitea homelab docker terraform
 ---
 
 This is a step by step guide to spinning up a self hosted git server with docker and terraform.
