@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>gitea | h0we</title>
+<meta name="generator" content="Jekyll v3.9.2" />
+<meta property="og:title" content="gitea" />
+<meta name="author" content="camh0we" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This is a step by step guide to spinning up a self hosted git server with docker and terraform." />
+<meta property="og:description" content="This is a step by step guide to spinning up a self hosted git server with docker and terraform." />
+<link rel="canonical" href="https://camh0we.com/2022/07/31/gitea-writeup.html" />
+<meta property="og:url" content="https://camh0we.com/2022/07/31/gitea-writeup.html" />
+<meta property="og:site_name" content="h0we" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-07-31T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="gitea" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"camh0we"},"dateModified":"2022-07-31T00:00:00+00:00","datePublished":"2022-07-31T00:00:00+00:00","description":"This is a step by step guide to spinning up a self hosted git server with docker and terraform.","headline":"gitea","mainEntityOfPage":{"@type":"WebPage","@id":"https://camh0we.com/2022/07/31/gitea-writeup.html"},"url":"https://camh0we.com/2022/07/31/gitea-writeup.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css" | relative_url }}"><link type="application/atom+xml" rel="alternate" href="https://camh0we.com/feed.xml" title="h0we" />
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">h0we</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">about</a><a class="page-link" href="/tags/">tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article
+  class="post h-entry"
+  itemscope
+  itemtype="http://schema.org/BlogPosting"
+>
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">
+      <div style="display: flex; justify-content: space-between">
+        <span style="display: flex">gitea</span><span class="post-meta" style="display: flex"
+          ><a href="/tag/gitea/" rel="tag">gitea</a>, <a href="/tag/homelab/" rel="tag">homelab</a>, <a href="/tag/docker/" rel="tag">docker</a>, <a href="/tag/terraform/" rel="tag">terraform</a></span
+        ></div>
+    </h1>
+    <p class="post-meta"><time
+        class="dt-published"
+        datetime="2022-07-31T00:00:00+00:00"
+        itemprop="datePublished"
+      >
+        Jul 31, 2022
+      </time>• 
+      <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-author h-card" itemprop="name">camh0we</span></span
+      ></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody"><p>This is a step by step guide to spinning up a self hosted git server with docker and terraform.</p>
+
+<!--more-->
+
+<h1 id="goals">goals</h1>
+
+<ul>
+  <li>ability to manage all of this from my laptop</li>
+  <li>locally hosted git server</li>
+  <li>ability to create and maintain local repositories</li>
+  <li>ability to mirror from existing github repos</li>
+  <li>ability to mirror to a github repo</li>
+  <li>accessible via https with valid ssl</li>
+  <li>single sign on oauth</li>
+</ul>
+
+<h1 id="planning">planning</h1>
+
+<p>This is the first big decision to tackle, and one I’ve gone round and round on many times. A few approaches I’ve tried in the past</p>
+
+<ul>
+  <li>single <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file, everything hard coded</li>
+  <li>single <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> file, using extenion fields and yaml anchors</li>
+  <li>multiple <code class="language-plaintext highlighter-rouge">docker-compose.yml</code> files, combine them as a build step</li>
+  <li><code class="language-plaintext highlighter-rouge">golang</code> templates and structs to define services in <code class="language-plaintext highlighter-rouge">go</code> and generate a single <code class="language-plaintext highlighter-rouge">docker-comose.yml</code></li>
+</ul>
+
+<p>Those all sorta worked, but got boring. Today I’m using the <code class="language-plaintext highlighter-rouge">terraform docker provider</code> to define and manage docker resources. This let’s me work locally on my laptop, and when it’s time to deploy or update things it’s done via a <code class="language-plaintext highlighter-rouge">terraform plan</code> and <code class="language-plaintext highlighter-rouge">terraform apply</code>.</p>
+
+<h2 id="environment-setup">environment setup</h2>
+
+<p>the hardware in play here</p>
+
+<ul>
+  <li>mac – osx – m1 – 16G</li>
+  <li>hopper – ubuntu – x86 - 8G</li>
+  <li>lenny – ubuntu – x86 – 16G</li>
+</ul>
+
+<h3 id="prerequisites">prerequisites</h3>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">docker</code> installed and manageable by non-root user on all 3 hosts, all connected to the LAN, on the same subnet <a href="https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user">docs</a>
+    <ul>
+      <li>if this is set up correctly i can run <code class="language-plaintext highlighter-rouge">docker ps</code> successfully on each machine without prefixing it with <code class="language-plaintext highlighter-rouge">sudo</code></li>
+      <li>this is a little script to do the whole docker install thing, only tested onnfresh ubuntu 22.04 installs</li>
+    </ul>
+  </li>
+  <li><code class="language-plaintext highlighter-rouge">terraform</code> installed and working on mac, this is the machine i physically work on <a href="https://learn.hashicorp.com/tutorials/terraform/install-cli">docs</a>
+    <ul>
+      <li>if this is set up I can run <code class="language-plaintext highlighter-rouge">terraform -version</code> successfully</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="bootstrap-a-terraform-project">bootstrap a terraform project</h3>
+
+<p>create a terraform directory with a <code class="language-plaintext highlighter-rouge">main.tf</code> file containing this:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>terraform {
+  required_providers {
+    docker = {
+      source  = "kreuzwerker/docker"
+      version = "~&gt; 2.13.0"
+    }
+  }
+}
+
+provider "docker" {}
+
+resource "docker_image" "nginx" {
+  name         = "nginx:latest"
+  keep_locally = false
+}
+
+resource "docker_container" "nginx" {
+  image = docker_image.nginx.latest
+  name  = "tutorial"
+  ports {
+    internal = 80
+    external = 8000
+  }
+}
+</code></pre></div></div>
+
+<p>run these commands to initialize the terraforom project and apply the plan</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>❯ cd terraform
+❯ terraform init
+
+...
+
+❯ terraform apply
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
+following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+ ...
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+docker_image.nginx: Creating...
+docker_image.nginx: Creation complete after 7s [id=sha256:fd2d3e51789eafe943eec792c81e5297ae23570f2a24ed239118f3226e74a1ccnginx:latest]
+docker_container.nginx: Creating...
+docker_container.nginx: Creation complete after 0s [id=c13f98b7818f755ff06c4a30021176481ee8ffa139d870cb1d9435e3cf906bf5]
+
+Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
+
+❯ docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS                  NAMES
+c13f98b7818f   fd2d3e51789e   "/docker-entrypoint.…"   4 minutes ago   Up 4 minutes   0.0.0.0:8000-&gt;80/tcp   tutorial
+</code></pre></div></div>
+
+<p>check out the page in a browser</p>
+
+<p><a href="https://bookstack.shrevelab.io/uploads/images/gallery/2022-07/screen-shot-2022-07-30-at-8-28-41-pm.png"><img src="https://bookstack.shrevelab.io/uploads/images/gallery/2022-07/scaled-1680-/screen-shot-2022-07-30-at-8-28-41-pm.png" alt="Screen Shot 2022-07-30 at 8.28.41 PM.png" /></a></p>
+
+<p>okay, so we can use terraform to spin up a local container, lets get it running on the other machine.</p>
+
+<h3 id="expose-the-docker-daemon-over-a-tcp-port">expose the docker daemon over a tcp port</h3>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo systemctl edit docker.service
+
+# paste into file
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
+
+sudo systemctl daemon-reload
+sudo systemctl restart docker.service
+</code></pre></div></div>
+
+<p>check it worked with</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; ps -aux | grep dockerd
+root       15997  0.9  1.0 1679280 80168 ?       Ssl  20:44   0:00 /usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
+</code></pre></div></div>
+
+<p>destroy what we have locally</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>terraform plan -destroy -out tfplan
+terraform apply "tfplan"
+</code></pre></div></div>
+
+<p>update the provider block in the terraform to point at the new docker daemon</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>provider "docker" {
+	host = "http://10.0.0.110:2376"
+}
+</code></pre></div></div>
+
+<p>then plan and apply the terraform</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>terraform plan -out tfplan
+terraform apply "tfplan"
+</code></pre></div></div>
+
+<p>navigate to <code class="language-plaintext highlighter-rouge">10.0.0.110:8000</code> in a web browser to see the same nginx starting page</p>
+
+<h1 id="locally-hosted-git-server">locally hosted git server</h1>
+
+<p><a href="https://gitea.io/en-us/">gitea</a></p>
+</div><a class="u-url" href="/2022/07/31/gitea-writeup.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <ul class="contact-list">
+          <li class="p-name">camh0we</li>
+          <li><a class="u-email" href="mailto:cam@camh0we.com">cam@camh0we.com</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p>h0we did you do that
+</p>
+      </div>
+      <div class="footer-col">
+        <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/camh0we" target="_blank" title="camh0we"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li></ul>
+</div>
+      </div>
+    </div>
+  </div>
+
+</footer>
+</body>
+
+</html>

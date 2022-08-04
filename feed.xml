@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.9.2">Jekyll</generator><link href="https://camh0we.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://camh0we.com/" rel="alternate" type="text/html" /><updated>2022-08-04T22:29:13+00:00</updated><id>https://camh0we.com/feed.xml</id><title type="html">h0we</title><subtitle>h0we did you do that
+</subtitle><author><name>camh0we</name><email>cam@camh0we.com</email></author><entry><title type="html">gootstrap</title><link href="https://camh0we.com/2022/08/04/gootstrap.html" rel="alternate" type="text/html" title="gootstrap" /><published>2022-08-04T00:00:00+00:00</published><updated>2022-08-04T00:00:00+00:00</updated><id>https://camh0we.com/2022/08/04/gootstrap</id><content type="html" xml:base="https://camh0we.com/2022/08/04/gootstrap.html">&lt;p&gt;&lt;a href=&quot;https://github.com/camh0we/gootstrap&quot;&gt;gootstrap&lt;/a&gt; is a tool that bootstraps a new &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;go&lt;/code&gt; project the way i like it&lt;/p&gt;
+
+&lt;p&gt;running &lt;a href=&quot;https://github.com/camh0we/gootstrap/blob/main/gootstrap.sh&quot;&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;./gootstrap.sh&lt;/code&gt;&lt;/a&gt; from an empty directory will result in a directory structure like this:&lt;/p&gt;
+
+&lt;div class=&quot;language-bash highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nb&quot;&gt;.&lt;/span&gt;
+├── Makefile
+├── bin
+│   └── newproj
+├── cmd
+│   └── newproj
+│       └── main.go
+├── go.mod
+├── internal
+└── pkg
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;the main package just prints “hello world”&lt;/p&gt;
+
+&lt;div class=&quot;language-go highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;package&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;fmt&quot;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;func&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;fmt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Println&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;### ~~~ hello world&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;empty &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/internal&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;/pkg&lt;/code&gt; directories are created to organize future packages&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;Makefile&lt;/code&gt; provides basic commands to build, test, and run&lt;/p&gt;</content><author><name>camh0we</name></author><category term="golang" /><category term="git" /><category term="bash" /><category term="cli" /><summary type="html">gootstrap is a tool that bootstraps a new go project the way i like it</summary></entry><entry><title type="html">resume rant</title><link href="https://camh0we.com/2022/08/03/resume-rant.html" rel="alternate" type="text/html" title="resume rant" /><published>2022-08-03T00:00:00+00:00</published><updated>2022-08-03T00:00:00+00:00</updated><id>https://camh0we.com/2022/08/03/resume-rant</id><content type="html" xml:base="https://camh0we.com/2022/08/03/resume-rant.html">&lt;p&gt;One of my bigget personal resume red flags is a list of languages and/or tools paired with some sort of rating scale (1-10, 0-5 stars, etc).&lt;/p&gt;
+
+&lt;p&gt;A junior developer hasn’t seen enough to know where their skills rank in the real world, so these rankings end up being lies.&lt;/p&gt;
+
+&lt;p&gt;A senior developer should be self aware enough to know where their skills actually rank, and any item that would end up with a high ranking should be highlighted elsewhere in the resume.&lt;/p&gt;</content><author><name>camh0we</name></author><category term="resume" /><category term="startup" /><category term="hiring" /><category term="meta" /><summary type="html">please stop ranking 1-10 on resumes</summary></entry><entry><title type="html">jekyll config</title><link href="https://camh0we.com/2022/08/02/jekyll-config.html" rel="alternate" type="text/html" title="jekyll config" /><published>2022-08-02T00:00:00+00:00</published><updated>2022-08-02T00:00:00+00:00</updated><id>https://camh0we.com/2022/08/02/jekyll-config</id><content type="html" xml:base="https://camh0we.com/2022/08/02/jekyll-config.html">&lt;h2 id=&quot;goal&quot;&gt;goal&lt;/h2&gt;
+
+&lt;p&gt;simple jekyll site hosted via github pages&lt;/p&gt;
+
+&lt;h2 id=&quot;config&quot;&gt;config&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;jekyll site running locally&lt;/li&gt;
+  &lt;li&gt;public github repository&lt;/li&gt;
+  &lt;li&gt;domain registered via cloudflare&lt;/li&gt;
+  &lt;li&gt;dns CNAME records pointing at repo’s gh pages url&lt;/li&gt;
+  &lt;li&gt;CNAME file in root of repo&lt;/li&gt;
+  &lt;li&gt;gh action for jekyll deploy&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;jekyll &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;_config.yml&lt;/code&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;repository: camh0we/h0weblog
+baseurl: &quot;&quot;
+url: https://camh0we.com
+include: [CNAME]
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;</content><author><name>camh0we</name></author><category term="jekyll" /><category term="github-actions" /><category term="deploy" /><category term="blog" /><summary type="html">here's how this blog is configured</summary></entry><entry><title type="html">gitea</title><link href="https://camh0we.com/2022/07/31/gitea-writeup.html" rel="alternate" type="text/html" title="gitea" /><published>2022-07-31T00:00:00+00:00</published><updated>2022-07-31T00:00:00+00:00</updated><id>https://camh0we.com/2022/07/31/gitea-writeup</id><content type="html" xml:base="https://camh0we.com/2022/07/31/gitea-writeup.html">&lt;p&gt;This is a step by step guide to spinning up a self hosted git server with docker and terraform.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;goals&quot;&gt;goals&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;ability to manage all of this from my laptop&lt;/li&gt;
+  &lt;li&gt;locally hosted git server&lt;/li&gt;
+  &lt;li&gt;ability to create and maintain local repositories&lt;/li&gt;
+  &lt;li&gt;ability to mirror from existing github repos&lt;/li&gt;
+  &lt;li&gt;ability to mirror to a github repo&lt;/li&gt;
+  &lt;li&gt;accessible via https with valid ssl&lt;/li&gt;
+  &lt;li&gt;single sign on oauth&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;planning&quot;&gt;planning&lt;/h1&gt;
+
+&lt;p&gt;This is the first big decision to tackle, and one I’ve gone round and round on many times. A few approaches I’ve tried in the past&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;single &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; file, everything hard coded&lt;/li&gt;
+  &lt;li&gt;single &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; file, using extenion fields and yaml anchors&lt;/li&gt;
+  &lt;li&gt;multiple &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-compose.yml&lt;/code&gt; files, combine them as a build step&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;golang&lt;/code&gt; templates and structs to define services in &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;go&lt;/code&gt; and generate a single &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker-comose.yml&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Those all sorta worked, but got boring. Today I’m using the &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;terraform docker provider&lt;/code&gt; to define and manage docker resources. This let’s me work locally on my laptop, and when it’s time to deploy or update things it’s done via a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;terraform plan&lt;/code&gt; and &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;terraform apply&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;environment-setup&quot;&gt;environment setup&lt;/h2&gt;
+
+&lt;p&gt;the hardware in play here&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;mac – osx – m1 – 16G&lt;/li&gt;
+  &lt;li&gt;hopper – ubuntu – x86 - 8G&lt;/li&gt;
+  &lt;li&gt;lenny – ubuntu – x86 – 16G&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;prerequisites&quot;&gt;prerequisites&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker&lt;/code&gt; installed and manageable by non-root user on all 3 hosts, all connected to the LAN, on the same subnet &lt;a href=&quot;https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user&quot;&gt;docs&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;if this is set up correctly i can run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;docker ps&lt;/code&gt; successfully on each machine without prefixing it with &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;sudo&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;this is a little script to do the whole docker install thing, only tested onnfresh ubuntu 22.04 installs&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;terraform&lt;/code&gt; installed and working on mac, this is the machine i physically work on &lt;a href=&quot;https://learn.hashicorp.com/tutorials/terraform/install-cli&quot;&gt;docs&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;if this is set up I can run &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;terraform -version&lt;/code&gt; successfully&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;bootstrap-a-terraform-project&quot;&gt;bootstrap a terraform project&lt;/h3&gt;
+
+&lt;p&gt;create a terraform directory with a &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;main.tf&lt;/code&gt; file containing this:&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;terraform {
+  required_providers {
+    docker = {
+      source  = &quot;kreuzwerker/docker&quot;
+      version = &quot;~&amp;gt; 2.13.0&quot;
+    }
+  }
+}
+
+provider &quot;docker&quot; {}
+
+resource &quot;docker_image&quot; &quot;nginx&quot; {
+  name         = &quot;nginx:latest&quot;
+  keep_locally = false
+}
+
+resource &quot;docker_container&quot; &quot;nginx&quot; {
+  image = docker_image.nginx.latest
+  name  = &quot;tutorial&quot;
+  ports {
+    internal = 80
+    external = 8000
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;run these commands to initialize the terraforom project and apply the plan&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;❯ cd terraform
+❯ terraform init
+
+...
+
+❯ terraform apply
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the
+following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+ ...
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+docker_image.nginx: Creating...
+docker_image.nginx: Creation complete after 7s [id=sha256:fd2d3e51789eafe943eec792c81e5297ae23570f2a24ed239118f3226e74a1ccnginx:latest]
+docker_container.nginx: Creating...
+docker_container.nginx: Creation complete after 0s [id=c13f98b7818f755ff06c4a30021176481ee8ffa139d870cb1d9435e3cf906bf5]
+
+Apply complete! Resources: 2 added, 0 changed, 0 destroyed.
+
+❯ docker ps
+CONTAINER ID   IMAGE          COMMAND                  CREATED         STATUS         PORTS                  NAMES
+c13f98b7818f   fd2d3e51789e   &quot;/docker-entrypoint.…&quot;   4 minutes ago   Up 4 minutes   0.0.0.0:8000-&amp;gt;80/tcp   tutorial
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;check out the page in a browser&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://bookstack.shrevelab.io/uploads/images/gallery/2022-07/screen-shot-2022-07-30-at-8-28-41-pm.png&quot;&gt;&lt;img src=&quot;https://bookstack.shrevelab.io/uploads/images/gallery/2022-07/scaled-1680-/screen-shot-2022-07-30-at-8-28-41-pm.png&quot; alt=&quot;Screen Shot 2022-07-30 at 8.28.41 PM.png&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;okay, so we can use terraform to spin up a local container, lets get it running on the other machine.&lt;/p&gt;
+
+&lt;h3 id=&quot;expose-the-docker-daemon-over-a-tcp-port&quot;&gt;expose the docker daemon over a tcp port&lt;/h3&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo systemctl edit docker.service
+
+# paste into file
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
+
+sudo systemctl daemon-reload
+sudo systemctl restart docker.service
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;check it worked with&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&amp;gt; ps -aux | grep dockerd
+root       15997  0.9  1.0 1679280 80168 ?       Ssl  20:44   0:00 /usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2376
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;destroy what we have locally&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;terraform plan -destroy -out tfplan
+terraform apply &quot;tfplan&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;update the provider block in the terraform to point at the new docker daemon&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;provider &quot;docker&quot; {
+	host = &quot;http://10.0.0.110:2376&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;then plan and apply the terraform&lt;/p&gt;
+
+&lt;div class=&quot;language-plaintext highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;terraform plan -out tfplan
+terraform apply &quot;tfplan&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;navigate to &lt;code class=&quot;language-plaintext highlighter-rouge&quot;&gt;10.0.0.110:8000&lt;/code&gt; in a web browser to see the same nginx starting page&lt;/p&gt;
+
+&lt;h1 id=&quot;locally-hosted-git-server&quot;&gt;locally hosted git server&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://gitea.io/en-us/&quot;&gt;gitea&lt;/a&gt;&lt;/p&gt;</content><author><name>camh0we</name></author><category term="gitea" /><category term="homelab" /><category term="docker" /><category term="terraform" /><summary type="html">This is a step by step guide to spinning up a self hosted git server with docker and terraform.</summary></entry><entry><title type="html">terraform</title><link href="https://camh0we.com/2022/07/30/terraform.html" rel="alternate" type="text/html" title="terraform" /><published>2022-07-30T00:00:00+00:00</published><updated>2022-07-30T00:00:00+00:00</updated><id>https://camh0we.com/2022/07/30/terraform</id><content type="html" xml:base="https://camh0we.com/2022/07/30/terraform.html">&lt;p&gt;time to spin up a simple terraform / docker project&lt;/p&gt;</content><author><name>bill bob</name></author><category term="howto" /><category term="terraform" /><category term="docker" /><category term="cli" /><summary type="html">time to spin up a simple terraform / docker project</summary></entry></feed>
