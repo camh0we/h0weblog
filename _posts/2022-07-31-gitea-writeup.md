@@ -1,6 +1,7 @@
 ---
 layout: post
-title: Gitea
+title: gitea
+author: camh0we
 excerpt_separator: <!--more-->
 tags: gitea homelab docker terraform
 ---
