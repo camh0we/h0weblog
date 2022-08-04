@@ -31,3 +31,4 @@ plugins:
 
 url: https://camh0we.com
 baseurl: ""
+include: [CNAME]
