@@ -53,4 +53,5 @@ jobs:
 repository: camh0we/h0weblog
 baseurl: ""
 url: https://camh0we.com
+include: [CNAME]
 ```
